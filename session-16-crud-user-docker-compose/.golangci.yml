@@ -1,0 +1,11 @@
+#option for analyzing runnning
+run:
+  tests: false
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - revive
