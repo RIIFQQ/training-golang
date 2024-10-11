@@ -4,20 +4,20 @@ import (
 	"log"
 	"net"
 
-	grpcHandler "training-golang/assignment-2-simple-ewallet-system/user-service/handler/grpc"
-	pb "training-golang/assignment-2-simple-ewallet-system/user-service/proto/user_service/v1"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/repository/postgres_gorm"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/service"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+
+	grpcHandler "training-golang/ewallet-system/wallet-service/handler/grpc"
+	pb "training-golang/ewallet-system/wallet-service/proto/wallet_service/v1"
+	"training-golang/ewallet-system/wallet-service/repository/postgres_gorm"
+	"training-golang/ewallet-system/wallet-service/service"
 )
 
 func main() {
-	listen, err := net.Listen("tcp", ":50052")
+	listen, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -25,19 +25,19 @@ func main() {
 	dsn := "postgresql://postgres:postgres@localhost:5432/postgres"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix:   "assignment2_user.", // schema name
+			TablePrefix:   "assignment2_wallet.", // schema name
 			SingularTable: false,
 		}})
 	if err != nil {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
-	repo := postgres_gorm.NewUserRepository(db) // Initialize your repository implementation
-	userService := service.NewUserService(repo)
-	userHandler := grpcHandler.NewUserHandler(userService)
+	repo := postgres_gorm.NewWalletRepository(db) // Initialize your repository implementation
+	walletService := service.NewWalletService(repo)
+	walletHandler := grpcHandler.NewWalletHandler(walletService)
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterUserServiceServer(grpcServer, userHandler)
+	pb.RegisterWalletServiceServer(grpcServer, walletHandler)
 
 	// Register reflection service on gRPC server.
 	reflection.Register(grpcServer)

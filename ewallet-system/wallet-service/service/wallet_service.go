@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"training-golang/assignment-2-simple-ewallet-system/wallet-service/entity"
+	"training-golang/ewallet-system/wallet-service/entity"
 )
 
 // IWalletService defines the methods for handling wallet operations.

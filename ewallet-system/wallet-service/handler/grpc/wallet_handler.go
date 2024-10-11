@@ -6,8 +6,8 @@ import (
 	"context"
 	"fmt"
 	"log"
-	pb "training-golang/assignment-2-simple-ewallet-system/wallet-service/proto/wallet_service/v1"
-	"training-golang/assignment-2-simple-ewallet-system/wallet-service/service"
+	pb "training-golang/ewallet-system/wallet-service/proto/wallet_service/v1"
+	"training-golang/ewallet-system/wallet-service/service"
 )
 
 // WalletHandler implements the WalletServiceServer interface

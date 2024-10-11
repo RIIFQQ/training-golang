@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/entity"
+	"training-golang/ewallet-system/user-service/entity"
 )
 
 // IUserService mendefinisikan interface untuk layanan pengguna

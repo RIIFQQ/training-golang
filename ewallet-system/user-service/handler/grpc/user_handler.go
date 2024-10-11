@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/entity"
-	pb "training-golang/assignment-2-simple-ewallet-system/user-service/proto/user_service/v1"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/service"
+	"training-golang/ewallet-system/user-service/entity"
+	pb "training-golang/ewallet-system/user-service/proto/user_service/v1"
+	"training-golang/ewallet-system/user-service/service"
 
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -18,7 +18,7 @@ type UserHandler struct {
 	userService service.IUserService
 }
 
-// NewUserHandler membuat instance baru dari UserHandler
+// NewUserHandler creates a new instance of UserHandler
 func NewUserHandler(userService service.IUserService) *UserHandler {
 	return &UserHandler{
 		userService: userService,
@@ -81,6 +81,7 @@ func (u *UserHandler) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		Message: fmt.Sprintf("Success created user with ID %d", createdUser.ID),
 	}, nil
 }
+
 func (u *UserHandler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.MutationResponse, error) {
 	// Convert the incoming request to the entity.User type
 	user := entity.User{
@@ -93,6 +94,7 @@ func (u *UserHandler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 	// Call the service layer to update the user
 	_, err := u.userService.UpdateUser(ctx, user.ID, user)
 	if err != nil {
+		log.Println(err)
 		return nil, err
 	}
 
@@ -100,6 +102,7 @@ func (u *UserHandler) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 		Message: fmt.Sprintf("Success update user with ID %d", req.GetId()),
 	}, nil
 }
+
 func (u *UserHandler) DeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.MutationResponse, error) {
 	if err := u.userService.DeleteUser(ctx, int(req.GetId())); err != nil {
 		log.Println(err)

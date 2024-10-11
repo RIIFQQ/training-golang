@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"log"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/entity"
-	"training-golang/assignment-2-simple-ewallet-system/user-service/service"
+	"training-golang/ewallet-system/user-service/entity"
+	"training-golang/ewallet-system/user-service/service"
 
 	"gorm.io/gorm"
 )

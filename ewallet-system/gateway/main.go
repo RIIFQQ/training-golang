@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	userPb "training-golang/assignment-2-simple-ewallet-system/user-service/proto/user_service/v1"
-	walletPb "training-golang/assignment-2-simple-ewallet-system/wallet-service/proto/wallet_service/v1"
+	userPb "training-golang/ewallet-system/user-service/proto/user_service/v1"
+	walletPb "training-golang/ewallet-system/wallet-service/proto/wallet_service/v1"
 
 	"github.com/gin-gonic/gin"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
